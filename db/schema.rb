@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_12_21_043821) do
     t.string "name", default: "NewPicture", null: false
     t.string "description"
     t.string "image", null: false
-    t.boolean "publish", null: false
+    t.boolean "publish"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
