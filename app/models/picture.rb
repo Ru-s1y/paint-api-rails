@@ -1,6 +1,7 @@
 class Picture < ApplicationRecord
 
   belongs_to :user, optional: true
+  belongs_to :album, optional: true
   validates :name, :image, :user_id, presence: true
   validates :publish, :inclusion => { :in => [true, false] }
 

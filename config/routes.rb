@@ -23,6 +23,13 @@ Rails.application.routes.draw do
         patch :update, on: :collection
         delete :destroy, on: :collection
       end
+
+      # album
+      resources :albums, only:[:create] do
+        get :index, on: :collection
+        patch :update, on: :collection
+        delete :destroy, on: :collection
+      end
     end
   end
 end

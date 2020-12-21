@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_secure_password
   
   has_many :pictures
+  has_many :albums
 
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 15 }
