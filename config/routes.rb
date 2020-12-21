@@ -16,6 +16,13 @@ Rails.application.routes.draw do
           delete :destroy, on: :collection
         end
       end
+      
+      # picture
+      resources :pictures, only:[:create] do
+        get :index, on: :collection
+        patch :update, on: :collection
+        delete :destroy, on: :collection
+      end
     end
   end
 end

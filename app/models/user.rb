@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   include UserAuth::Tokenizable
   has_secure_password
+  
+  has_many :pictures
 
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 15 }
@@ -10,6 +12,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true
   validates :password, presence: true, length: { minimum: 8 }
+
 
   def my_json
     as_json(only: [:id, :name, :email, :created_at])
