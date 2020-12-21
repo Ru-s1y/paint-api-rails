@@ -11,6 +11,7 @@ json.pictures do
     json.publish picture.publish
     json.image picture.image
     json.created_at picture.created_at
+    json.user_id picture.user_id
     json.username picture.user.name
   end
 end

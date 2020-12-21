@@ -1,7 +1,8 @@
 class Picture < ApplicationRecord
 
   belongs_to :user, optional: true
-  validates :name, :image, :publish, :user_id, presence: true
+  validates :name, :image, :user_id, presence: true
+  validates :publish, :inclusion => { :in => [true, false] }
 
   # development, test環境用
   # def parse_base64(data, extension)

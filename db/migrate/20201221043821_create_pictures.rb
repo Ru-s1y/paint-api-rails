@@ -4,7 +4,7 @@ class CreatePictures < ActiveRecord::Migration[5.2]
       t.string :name, null: false, default: "NewPicture"
       t.string :description
       t.string :image, null: false
-      t.boolean :publish, null: false, dafault: false
+      t.boolean :publish, dafault: false
       t.integer :user_id, null: false
 
       t.timestamps
