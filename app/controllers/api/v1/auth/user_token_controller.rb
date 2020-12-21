@@ -1,43 +1,35 @@
 module Api
   module V1
     module Auth
-      class RegistrationsController < ApplicationController
+      class UserTokenController < ApplicationController
         rescue_from UserAuth.not_found_exception_class, with: :not_found
         before_action :delete_cookie # Authenticatorモジュールから
+        before_action :authenticate, only: [:create] # privateメソッドから
 
+        # login
         def create
-          @user = User.new(
-            name: user_params[:name],
-            email: user_params[:email],
-            password: user_params[:password],
-            password_confirmation: user_params[:password_confirmation]
-          )
+          cookies[token_access_key] = cookie_token # tokenをCookieに保存
+          render json: {
+            exp: auth.payload[:exp], # 有効期限
+            user: entity.my_json # ユーザー
+          }
+        end
 
-          if @user.save
-            cookies[token_access_key] = cookie_token
-            render json: {
-              exp: auth.payload[:exp], # 有効期限
-              user: entity.my_json # ユーザー
-            }
-          else
-            render @user.errors
-          end
+        # logout
+        def destroy
+          head(:ok) # before_actionでCookieが消されるのでヘッダーで成功を送るだけでいい
         end
 
         private
-          def user_params
-            params.require(:user).permit(:name, :email, :password, :password_confimation)
-          end
-
           # メールアドレスからアクティブなユーザーを探す
           def entity
-            @_entity ||= User.find_by(email: user_params[:email])
+            @_entity ||= User.find_by(email: auth_params[:email])
           end
 
           # ストロングパラメーター
-          # def auth_params
-          #   params.require(:auth).permit(:email, :password)
-          # end
+          def auth_params
+            params.require(:user).permit(:email, :password)
+          end
 
           # トークンを発行する
           def auth
@@ -57,7 +49,7 @@ module Api
           # entityが存在しない、entityのパスワードが一致しない場合に404エラーを返す
           # メールアドレスに一致するユーザーがいない、パスワードが一致しない場合にRecordNotFound
           def authenticate
-            unless entity.present? && entity.authenticate(user_params[:password])
+            unless entity.present? && entity.authenticate(auth_params[:password])
               raise UserAuth.not_found_exception_class
             end
           end

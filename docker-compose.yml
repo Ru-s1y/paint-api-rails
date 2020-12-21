@@ -2,8 +2,8 @@ version: '3'
 services:
   db:
     image: postgres
-    # volumes:
-    #   - psgl_data:/var/lib/postgresql/data
+    volumes:
+      - psgl_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     environment: 
