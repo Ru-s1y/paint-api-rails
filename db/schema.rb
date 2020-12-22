@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2020_12_21_122742) do
+ActiveRecord::Schema.define(version: 2020_12_22_163846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +23,25 @@ ActiveRecord::Schema.define(version: 2020_12_21_122742) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  
+
+  create_table "favorite_albums", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "album_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_favorite_albums_on_album_id"
+    t.index ["user_id"], name: "index_favorite_albums_on_user_id"
+  end
+
+  create_table "favorite_pictures", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "picture_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["picture_id"], name: "index_favorite_pictures_on_picture_id"
+    t.index ["user_id"], name: "index_favorite_pictures_on_user_id"
+  end
+
   create_table "pictures", force: :cascade do |t|
     t.string "name", default: "NewPicture", null: false
     t.string "description"
@@ -46,4 +63,8 @@ ActiveRecord::Schema.define(version: 2020_12_21_122742) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "favorite_albums", "albums"
+  add_foreign_key "favorite_albums", "users"
+  add_foreign_key "favorite_pictures", "pictures"
+  add_foreign_key "favorite_pictures", "users"
 end

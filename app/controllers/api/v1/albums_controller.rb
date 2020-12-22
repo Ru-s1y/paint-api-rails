@@ -16,7 +16,7 @@ module Api
         @album = Album.new(
           name: album_params[:name],
           description: album_params[:description],
-          publish: album_params[:publish],
+          publish: "false",
           user_id: current_user.id
         )
         if @album.save
@@ -32,7 +32,6 @@ module Api
         else
           render json: @album.errors
         end
-
       end
 
       def destroy

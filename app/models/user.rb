@@ -3,7 +3,9 @@ class User < ApplicationRecord
   has_secure_password
   
   has_many :pictures
-  has_many :albums
+  has_many :albums, dependent: :destroy
+  has_many :favorite_pictures, dependent: :destroy
+  has_many :favorite_albums, dependent: :destroy
 
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 15 }
