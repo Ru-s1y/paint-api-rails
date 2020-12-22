@@ -2,6 +2,8 @@ class Picture < ApplicationRecord
 
   belongs_to :user, optional: true
   belongs_to :album, optional: true
+  has_many :favorite_pictures, dependent: :destroy
+
   validates :name, :image, :user_id, presence: true
   validates :publish, :inclusion => { :in => [true, false] }
 

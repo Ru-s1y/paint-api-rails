@@ -31,6 +31,25 @@ Rails.application.routes.draw do
         delete :destroy, on: :collection
         get :thumbnail, on: :collection
       end
+
+      # favorite
+      resources :favorite_pictures, only: [:create] do
+        get :show, on: :collection
+        delete :destroy, on: :collection
+      end
+
+      resources :favorite_albums, only: [:create] do
+        get :show, on: :collection
+        delete :destroy, on: :collection
+      end
+
+      # mypage
+      resources :mypages, only:[] do
+        get :index, on: :collection
+        get :index_pictures, on: :collection
+        get :index_albums, on: :collection
+        get :album_list, on: :collection
+      end
     end
   end
 end

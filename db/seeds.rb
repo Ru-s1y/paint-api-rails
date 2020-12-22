@@ -5,33 +5,24 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# 3.times do |n|
-#   name = Faker::Games::Pokemon.name
-#   email = Faker::Internet.email
-#   password = "password"
-#   User.create!(
-#     name: name,
-#     email: email,
-#     password: password,
-#     password_confirmation: password,
-#     activated: true
-#   )
-# end
+User.create!(
+  name: "testUser",
+  email: "test@example.com",
+  password: "password",
+  password_confirmation: "password",
+  activated: true,
+)
 
 3.times do |n|
-  name = Faker::Books::Lovecraft.deity
-  description = Faker::Books::Lovecraft.fhtagn
-  image = [
-    "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/76f5384266449e657ada7574d671f9d696f4debc.png",
-    "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/61fc4aeca99d31d9b975e6ed42fc193fc049ad57.png",
-    "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/6011ce75d6f22946e6f807f57e12d1ad61160a5a.png"
-  ]
-  Picture.create!(
+  name = Faker::Games::Pokemon.name
+  email = Faker::Internet.email
+  password = "password"
+  User.create!(
     name: name,
-    description: description,
-    image: image[n],
-    publish: true,
-    user_id: n
+    email: email,
+    password: password,
+    password_confirmation: password,
+    activated: true,
   )
 end
 
