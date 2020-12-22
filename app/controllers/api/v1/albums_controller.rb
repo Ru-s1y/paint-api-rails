@@ -1,6 +1,7 @@
 module Api
   module V1
     class AlbumsController < ApplicationController
+
       include Pagenation
       before_action :authenticate_user, except: [:index, :thumbnail]
       before_action :set_album, only: [:update, :destroy, :thumbnail]
