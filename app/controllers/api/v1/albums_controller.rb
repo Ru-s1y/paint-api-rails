@@ -1,12 +1,14 @@
 module Api
   module V1
     class AlbumsController < ApplicationController
-      before_action :authenticate_user, except: [:index]
-      before_action :set_album, only: [:update, :destroy]
+
+      include Pagenation
+      before_action :authenticate_user, except: [:index, :thumbnail]
+      before_action :set_album, only: [:update, :destroy, :thumbnail]
 
       def index
-        @albums = Albums.where(publish: true).order(created_at: :desc).page(params[:page]).per(10)
-        pagenation = resources_with_pagination(@pictures)
+        @albums = Album.where(publish: true).order(created_at: :desc).page(params[:page]).per(10)
+        pagenation = resources_with_pagination(@albums)
         render 'index.json.jbuilder'
       end
 
@@ -39,6 +41,11 @@ module Api
         else
           render json: @album.errors
         end
+      end
+
+      def thumbnail
+        @picture = Picture.find_by(album_id: @album.id, publish: true)
+        render json: @picture
       end
 
       private
