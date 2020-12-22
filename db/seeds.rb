@@ -5,20 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# 3.times do |n|
-#   name = Faker::Games::Pokemon.name
-#   email = Faker::Internet.email
-#   password = "password"
-#   User.create!(
-#     name: name,
-#     email: email,
-#     password: password,
-#     password_confirmation: password,
-#     activated: true
-#   )
-# end
-
 3.times do |n|
+  name = Faker::Games::Pokemon.name
+  email = Faker::Internet.email
+  password = "password"
+  User.create!(
+    name: name,
+    email: email,
+    password: password,
+    password_confirmation: password,
+    activated: true
+  )
+end
+
+3.times do |m|
   name = Faker::Books::Lovecraft.deity
   description = Faker::Books::Lovecraft.fhtagn
   image = [
@@ -29,8 +29,20 @@
   Picture.create!(
     name: name,
     description: description,
-    image: image[n],
+    image: image[m],
     publish: true,
-    user_id: n
+    user_id: m + 1,
+    album_id: m + 1
+  )
+end
+
+3.times do |i|
+  name = Faker::Creature::Animal.name
+  description = Faker::Books::CultureSeries.book
+  Album.create!(
+    name: name,
+    description: description,
+    publish: true,
+    user_id: i + 1,
   )
 end

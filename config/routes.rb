@@ -29,6 +29,7 @@ Rails.application.routes.draw do
         get :index, on: :collection
         patch :update, on: :collection
         delete :destroy, on: :collection
+        get :thumbnail, on: :collection
       end
     end
   end
