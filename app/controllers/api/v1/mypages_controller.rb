@@ -25,6 +25,12 @@ module Api
         @albums = Album.where(user_id: current_user.id)
         render json: @albums
       end
+
+      def favorites
+        @favorite_pictures = FavoritePicture.where(user_id: current_user.id).limit(6)
+        @favorite_albums = FavoriteAlbum.where(user_id: current_user.id).limit(6)
+        render 'favorites.json.jbuilder'
+      end
     end
   end
 end

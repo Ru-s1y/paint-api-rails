@@ -49,11 +49,11 @@ module Api
 
       private
         def album_params
-          params.require(:album).permit(:name, :description, :publish)
+          params.require(:album).permit(:id, :name, :description, :publish)
         end
 
         def set_album
-          @album = Album.find(params[:id])
+          @album = Album.find_by(id: params[:id])
         end
     end
   end

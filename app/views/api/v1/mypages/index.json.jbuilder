@@ -6,7 +6,7 @@ json.pictures do
     json.publish picture.publish
     json.image picture.image
     json.created_at picture.created_at
-    json.album_name picture.album.name
+    # json.album_name picture.album.name
   end
 end
 

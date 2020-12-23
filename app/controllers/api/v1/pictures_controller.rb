@@ -3,6 +3,7 @@ module Api
     class PicturesController < ApplicationController
       include Pagenation
       before_action :authenticate_user, only: [:create, :update, :destroy]
+      before_action :set_picture, only: [:update, :destroy]
 
       def index
         @pictures = Picture.where(publish: true).order(created_at: :desc).page(params[:page]).per(10)
@@ -53,11 +54,11 @@ module Api
 
       private
         def picture_params
-          params.require(:picture).permit(:name, :description, :image, :publish, :album_id)
+          params.require(:picture).permit(:id, :name, :description, :image, :publish, :album_id)
         end
 
         def set_picture
-          @picture = Picture.find_by(id: params[:id])
+          @picture = Picture.find_by(id: picture_params[:id])
         end
 
         # 以下アップロード関連
