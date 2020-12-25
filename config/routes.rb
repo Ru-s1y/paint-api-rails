@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  root to: "statics#home"
   namespace :api do
     namespace :v1 do
-      root to: "statics#home"
       namespace :auth do
         # users
         resources :users, only:[] do
