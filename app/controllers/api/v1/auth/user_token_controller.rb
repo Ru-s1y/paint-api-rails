@@ -42,7 +42,8 @@ module Api
               value: auth.token, # Cookieの値
               expires: Time.at(auth.payload[:exp]), # Cookieの有効期限
               secure: Rails.env.production?, # https通信でしかアクセスできないCookie(本番環境のみ)
-              http_only: true # JavaScriptからkアクセスできないCookie
+              http_only: true, # JavaScriptからアクセスできないCookie
+              # same_site: :none # Set-Cookieが弾かれるため(Rack2.1以上出ないと使えない)
             }
           end
 
