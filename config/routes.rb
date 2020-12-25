@@ -44,11 +44,17 @@ Rails.application.routes.draw do
       end
 
       # mypage
-      resources :mypages, only:[] do
+      resources :mypages, only: [] do
         get :index, on: :collection
         get :index_pictures, on: :collection
         get :index_albums, on: :collection
         get :album_list, on: :collection
+        get :favorites, on: :collection
+      end
+
+      # home
+      resources :homes, only: [] do
+        get :index, on: :collection
       end
     end
   end

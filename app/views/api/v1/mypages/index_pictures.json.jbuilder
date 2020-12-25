@@ -1,3 +1,8 @@
+json.meta do
+  json.total_pages @pictures.total_pages
+  json.current_page @pictures.current_page
+end
+
 json.pictures do
   json.array! @pictures do |picture|
     json.id picture.id
@@ -6,16 +11,7 @@ json.pictures do
     json.publish picture.publish
     json.image picture.image
     json.created_at picture.created_at
-    # json.album_name picture.album.name
-  end
-end
-
-json.albums do
-  json.array! @albums do |album|
-    json.id album.id
-    json.name album.name
-    json.description album.description
-    json.publish album.publish
-    json.created_at album.created_at
+    json.user_id picture.user_id
+    json.username picture.user.name
   end
 end
