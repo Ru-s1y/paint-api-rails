@@ -30,10 +30,11 @@ end
   name = Faker::Books::Lovecraft.deity
   description = Faker::Books::Lovecraft.fhtagn
   image = [
-    "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/76f5384266449e657ada7574d671f9d696f4debc.png",
-    "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/61fc4aeca99d31d9b975e6ed42fc193fc049ad57.png",
-    "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/6011ce75d6f22946e6f807f57e12d1ad61160a5a.png"
+    "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/bbd6615ac7889a3273f8b3008bc9e27ab72e75f9.png",
+    "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/c661356b03039ad0ce6c495af8236e40a0553e8f.png",
+    "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/096228a856f8805920940af4597078078618eb96.png"
   ]
+  # 木、ハート、鉛筆
   Picture.create!(
     name: name,
     description: description,

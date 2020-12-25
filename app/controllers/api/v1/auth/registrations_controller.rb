@@ -20,7 +20,8 @@ module Api
               user: entity.my_json # ユーザー
             }
           else
-            render @user.errors
+            errors_messages = @user.errors.keys.map { |key| [key, @user.errors.full_messages_for(key)]}.to_h
+            render json: { message: errors_messages }
           end
         end
 
