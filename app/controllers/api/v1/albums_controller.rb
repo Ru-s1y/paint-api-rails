@@ -22,7 +22,10 @@ module Api
         if @album.save
           render json: @album
         else
-          render json: @album.errors
+          render json: { 
+            message: error,
+            album: @album.errors
+          }
         end
       end
 
@@ -43,7 +46,9 @@ module Api
       end
 
       def thumbnail
-        @picture = Picture.find_by(album_id: @album.id, publish: true)
+        # @picture = Picture.find_by(album_id: @album.id, publish: true)
+        @album = Album.find_by(id: params[:id])
+        @picture = @album.pictures.find_by(publish: true)
         render json: @picture
       end
 

@@ -14,7 +14,7 @@ User.create!(
 )
 
 3.times do |n|
-  name = Faker::Games::Zelda.character
+  name = Faker::Games::Pokemon.name
   email = Faker::Internet.email
   password = "pass#{n}wordess"
   User.create!(
@@ -49,19 +49,23 @@ end
     image: image[m],
     publish: true,
     user_id: m + 1,
-    album_id: m + 1
   )
 end
 
-
-
 3.times do |i|
-  name = Faker::Creature::Animal.name
+  # name = Faker::Creature::Animal.name
   description = Faker::Books::CultureSeries.book
   Album.create!(
-    name: name,
+    name: "アルバム#{i + 1}",
     description: description,
     publish: true,
     user_id: i + 1,
+  )
+end
+
+3.times do |x|
+  Mylist.create!(
+    album_id: x + 1,
+    picture_id: x + 1,
   )
 end
