@@ -57,6 +57,10 @@ module Api
           params.require(:picture).permit(:id, :name, :description, :image, :publish)
         end
 
+        def tag_params
+          params.require(:tag).permit(:name)
+        end
+
         def set_picture
           @picture = Picture.find_by(id: picture_params[:id])
         end

@@ -4,12 +4,14 @@ module Api
       include Pagenation
       before_action :authenticate_user
 
+      # 自分のピクチャーとアルバムを取得
       def index
         @pictures = Picture.where(user_id: current_user.id).order(created_at: :desc).limit(6)
         @albums = Album.where(user_id: current_user.id).order(created_at: :desc).limit(6)
         render 'index.json.jbuilder'
       end
 
+      # 
       def index_pictures
         @pictures = Picture.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
         pagenation = resources_with_pagination(@pictures)
@@ -39,7 +41,10 @@ module Api
           picture_id: mylist_params[:picture_id]
         )
         if @mylist
-          render json: { message: "success" }
+          render json: {
+            message: "success",
+            album_name: @mylist.album.name
+          }
         else
           render json: { message: "failed" }
         end

@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# User
 User.create!(
   name: "レモネード太郎",
   email: "testfirst@example.com",
@@ -13,6 +15,7 @@ User.create!(
   activated: true,
 )
 
+# Users
 3.times do |n|
   name = Faker::Games::Pokemon.name
   email = Faker::Internet.email
@@ -26,22 +29,23 @@ User.create!(
   )
 end
 
+# Picture
+name = [
+  "木",
+  "ハート",
+  "鉛筆"
+]
+description = [
+  "ゲームの背景で出てきそうな木。",
+  "拾うと回復する。",
+  "今となってはほとんど使わなくなった。"
+]
+image = [
+  "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/bbd6615ac7889a3273f8b3008bc9e27ab72e75f9.png",
+  "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/c661356b03039ad0ce6c495af8236e40a0553e8f.png",
+  "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/096228a856f8805920940af4597078078618eb96.png"
+]
 3.times do |m|
-  name = [
-    "木",
-    "ハート",
-    "鉛筆"
-  ]
-  description = [
-    "ゲームの背景で出てきそうな木。",
-    "拾うと回復する。",
-    "今となってはほとんど使わなくなった。"
-  ]
-  image = [
-    "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/bbd6615ac7889a3273f8b3008bc9e27ab72e75f9.png",
-    "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/c661356b03039ad0ce6c495af8236e40a0553e8f.png",
-    "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/096228a856f8805920940af4597078078618eb96.png"
-  ]
   # 木、ハート、鉛筆
   Picture.create!(
     name: name[m],
@@ -52,6 +56,7 @@ end
   )
 end
 
+# Album
 3.times do |i|
   # name = Faker::Creature::Animal.name
   description = Faker::Books::CultureSeries.book
@@ -63,9 +68,37 @@ end
   )
 end
 
+# Mylist
 3.times do |x|
   Mylist.create!(
     album_id: x + 1,
     picture_id: x + 1,
   )
 end
+
+# # Tags
+# tag_name = [
+#   "自然",
+#   "ドロップ品",
+#   "文房具"
+# ]
+# 3.times do |a|
+#   Tag.create!(
+#     name: tag_name[a]
+#   )
+# end
+
+# # Tag_picture
+# 3.times do |b|
+#   TagPicture.create!(
+#     picture_id: b + 1,
+#     tag_id: b + 1
+#   )
+# end
+
+# 3.times do |c|
+#   TagAlbum.create!(
+#     album_id: c + 1,
+#     tag_id: c + 1
+#   )
+# end

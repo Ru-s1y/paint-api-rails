@@ -43,10 +43,11 @@ ActiveRecord::Schema.define(version: 2020_12_26_021951) do
   end
 
   create_table "mylists", force: :cascade do |t|
-    t.bigint "picture_id", null: false
     t.bigint "album_id", null: false
+    t.bigint "picture_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["album_id", "picture_id"], name: "index_mylists_on_album_id_and_picture_id", unique: true
     t.index ["album_id"], name: "index_mylists_on_album_id"
     t.index ["picture_id"], name: "index_mylists_on_picture_id"
   end
