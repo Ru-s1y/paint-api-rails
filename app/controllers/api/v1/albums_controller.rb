@@ -4,12 +4,17 @@ module Api
 
       include Pagenation
       before_action :authenticate_user, except: [:index, :thumbnail]
-      before_action :set_album, only: [:update, :destroy, :thumbnail]
+      before_action :set_album, only: [:pictures, :update, :destroy, :thumbnail]
 
       def index
         @albums = Album.where(publish: true).order(created_at: :desc).page(params[:page]).per(10)
         pagenation = resources_with_pagination(@albums)
         render 'index.json.jbuilder'
+      end
+
+      def pictures
+        @pictures = @album.pictures.where(publish: true)
+        render json: @pictures
       end
 
       def create
@@ -22,7 +27,10 @@ module Api
         if @album.save
           render json: @album
         else
-          render json: @album.errors
+          render json: { 
+            message: error,
+            album: @album.errors
+          }
         end
       end
 
@@ -43,7 +51,9 @@ module Api
       end
 
       def thumbnail
-        @picture = Picture.find_by(album_id: @album.id, publish: true)
+        # @picture = Picture.find_by(album_id: @album.id, publish: true)
+        @album = Album.find_by(id: params[:id])
+        @picture = @album.pictures.find_by(publish: true)
         render json: @picture
       end
 

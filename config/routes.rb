@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       # album
       resources :albums, only:[:create] do
         get :index, on: :collection
+        get :pictures, on: :collection
         patch :update, on: :collection
         delete :destroy, on: :collection
         get :thumbnail, on: :collection
@@ -47,9 +48,11 @@ Rails.application.routes.draw do
       resources :mypages, only: [] do
         get :index, on: :collection
         get :index_pictures, on: :collection
-        get :index_albums, on: :collection
         get :album_list, on: :collection
         get :favorites, on: :collection
+        get :album_pictures, on: :collection
+        post :register_album, on: :collection
+        delete :destroy_album, on: :collection
       end
 
       # home

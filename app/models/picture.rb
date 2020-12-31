@@ -1,22 +1,15 @@
 class Picture < ApplicationRecord
 
   belongs_to :user, optional: true
-  belongs_to :album, optional: true
   has_many :favorite_pictures, dependent: :destroy
+
+  has_many :mylists, dependent: :destroy
+  has_many :albums, through: :mylists
+
+  has_many :tag_pictures, dependent: :destroy
+  has_many :tags, through: :tag_pictures
 
   validates :name, :image, :user_id, presence: true
   validates :publish, :inclusion => { :in => [true, false] }
-
-  # development, test環境用
-  # def parse_base64(data, extension)
-  #   filename = Time.zone.now.to_s + extension
-  #   File.open("#{Rails.root}/tmp/#{filename}", 'wb') do |f|
-  #     f.write(data)
-  #   end
-  # end
-
-  private
-    # def attach_image(filename)
-    # end
 
 end

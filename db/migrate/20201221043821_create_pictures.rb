@@ -6,7 +6,6 @@ class CreatePictures < ActiveRecord::Migration[5.2]
       t.string :image, null: false
       t.boolean :publish, dafault: false
       t.integer :user_id, null: false
-      t.integer :album_id
 
       t.timestamps
     end

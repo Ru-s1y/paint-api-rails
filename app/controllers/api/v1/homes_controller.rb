@@ -5,10 +5,7 @@ module Api
       def index
         @pictures = Picture.where(publish: true).order(created_at: :desc).limit(6)
         @albums = Album.where(publish: true).order(created_at: :desc).limit(6)
-        render json: {
-          pictures: @pictures,
-          albums: @albums
-        }
+        render 'index.json.jbuilder'
       end
       
     end
