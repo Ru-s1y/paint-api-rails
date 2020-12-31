@@ -4,12 +4,17 @@ module Api
 
       include Pagenation
       before_action :authenticate_user, except: [:index, :thumbnail]
-      before_action :set_album, only: [:update, :destroy, :thumbnail]
+      before_action :set_album, only: [:pictures, :update, :destroy, :thumbnail]
 
       def index
         @albums = Album.where(publish: true).order(created_at: :desc).page(params[:page]).per(10)
         pagenation = resources_with_pagination(@albums)
         render 'index.json.jbuilder'
+      end
+
+      def pictures
+        @pictures = @album.pictures.where(publish: true)
+        render json: @pictures
       end
 
       def create

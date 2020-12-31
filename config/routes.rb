@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       # album
       resources :albums, only:[:create] do
         get :index, on: :collection
+        get :pictures, on: :collection
         patch :update, on: :collection
         delete :destroy, on: :collection
         get :thumbnail, on: :collection

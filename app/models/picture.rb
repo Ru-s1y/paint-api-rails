@@ -6,8 +6,8 @@ class Picture < ApplicationRecord
   has_many :mylists, dependent: :destroy
   has_many :albums, through: :mylists
 
-  # has_many :tag_pictures
-  # has_many :tags, through: :tag_pictures
+  has_many :tag_pictures, dependent: :destroy
+  has_many :tags, through: :tag_pictures
 
   validates :name, :image, :user_id, presence: true
   validates :publish, :inclusion => { :in => [true, false] }
