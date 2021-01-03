@@ -59,6 +59,18 @@ Rails.application.routes.draw do
       resources :homes, only: [] do
         get :index, on: :collection
       end
+
+      resources :tags, only: [] do
+        get :index, on: :collection
+        get :all_tags, on: :collection
+        get :index_tag, on: :collection
+        get :search_pictures, on: :collection
+        get :search_tags, on: :collection
+        post :create_picture_tag, on: :collection
+        delete :destroy_picture_tag, on: :collection
+        post :create_tag, on: :collection
+        delete :destroy, on: :collection
+      end
     end
   end
 end

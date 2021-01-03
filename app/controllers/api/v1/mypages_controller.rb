@@ -13,7 +13,7 @@ module Api
 
       # 
       def index_pictures
-        @pictures = Picture.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(10)
+        @pictures = Picture.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).per(12)
         pagenation = resources_with_pagination(@pictures)
         render 'index_pictures.json.jbuilder'
       end

@@ -56,9 +56,18 @@ image = [
   )
 end
 
+100.times do |d|
+  Picture.create!(
+    name: "name#{d}",
+    description: "description#{d}",
+    image: "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/096228a856f8805920940af4597078078618eb96.png",
+    publish: true,
+    user_id: 1,
+  )
+end
+
 # Album
 3.times do |i|
-  # name = Faker::Creature::Animal.name
   description = Faker::Books::CultureSeries.book
   Album.create!(
     name: "アルバム#{i + 1}",
@@ -76,25 +85,35 @@ end
   )
 end
 
-# # Tags
-# tag_name = [
-#   "自然",
-#   "ドロップ品",
-#   "文房具"
-# ]
-# 3.times do |a|
-#   Tag.create!(
-#     name: tag_name[a]
-#   )
-# end
+# Tags
+tag_name = [
+  "自然",
+  "ドロップ品",
+  "文房具",
+  "赤",
+  "緑",
+  "青",
+]
+6.times do |a|
+  Tag.create!(
+    name: tag_name[a]
+  )
+end
 
-# # Tag_picture
-# 3.times do |b|
-#   TagPicture.create!(
-#     picture_id: b + 1,
-#     tag_id: b + 1
-#   )
-# end
+100.times do |b|
+  name = Faker::Game.title
+  Tag.create!(
+    name: name
+  )
+end
+
+# Tag_picture
+3.times do |c|
+  PictureTag.create!(
+    picture_id: c + 1,
+    tag_id: c + 1
+  )
+end
 
 # 3.times do |c|
 #   TagAlbum.create!(
