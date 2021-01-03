@@ -6,7 +6,7 @@ module Api
       before_action :set_picture, only: [:update, :destroy]
 
       def index
-        @pictures = Picture.where(publish: true).order(created_at: :desc).page(params[:page]).per(10)
+        @pictures = Picture.where(publish: true).order(created_at: :desc).page(params[:page]).per(12)
         pagenation = resources_with_pagination(@pictures)
         render 'index.json.jbuilder'
       end
@@ -41,6 +41,16 @@ module Api
 
       def update
         if @picture.update(picture_params)
+          if params[:tag_id]
+            @tag = Tag.find(params[:tag_id])
+            if !@tag
+              @tag = Tag.create!(name: params[:tag_name])
+            end
+            @picture_tag = PictureTag.create!(
+              picture_id: params[:picture_id],
+              tag_id: params[:tag_id]
+            )
+          end
           render json: @picture
         else
           render json: @picture.errors

@@ -7,7 +7,7 @@ module Api
       before_action :set_album, only: [:pictures, :update, :destroy, :thumbnail]
 
       def index
-        @albums = Album.where(publish: true).order(created_at: :desc).page(params[:page]).per(10)
+        @albums = Album.where(publish: true).order(created_at: :desc).page(params[:page]).per(12)
         pagenation = resources_with_pagination(@albums)
         render 'index.json.jbuilder'
       end
