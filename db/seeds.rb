@@ -9,7 +9,7 @@
 # User
 User.create!(
   name: "レモネード太郎",
-  email: "testfirst@example.com",
+  email: "first_test@example.com",
   password: "passwordtest",
   password_confirmation: "passwordtest",
   activated: true,
@@ -36,7 +36,7 @@ name = [
   "鉛筆"
 ]
 description = [
-  "ゲームの背景で出てきそうな木。",
+  "背景で出てきそうな木。",
   "拾うと回復する。",
   "今となってはほとんど使わなくなった。"
 ]
@@ -56,15 +56,15 @@ image = [
   )
 end
 
-100.times do |d|
-  Picture.create!(
-    name: "name#{d}",
-    description: "description#{d}",
-    image: "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/096228a856f8805920940af4597078078618eb96.png",
-    publish: true,
-    user_id: 1,
-  )
-end
+# 100.times do |d|
+#   Picture.create!(
+#     name: "name#{d}",
+#     description: "description#{d}",
+#     image: "https://rails-paint-api.s3-ap-northeast-1.amazonaws.com/uploader/1/096228a856f8805920940af4597078078618eb96.png",
+#     publish: true,
+#     user_id: 1,
+#   )
+# end
 
 # Album
 3.times do |i|
@@ -100,12 +100,12 @@ tag_name = [
   )
 end
 
-100.times do |b|
-  name = Faker::Game.title
-  Tag.create!(
-    name: name
-  )
-end
+# 100.times do |b|
+#   name = Faker::Game.title
+#   Tag.create!(
+#     name: name
+#   )
+# end
 
 # Tag_picture
 3.times do |c|
