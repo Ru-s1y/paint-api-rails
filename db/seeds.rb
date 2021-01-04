@@ -12,7 +12,6 @@ User.create!(
   email: "first_test@example.com",
   password: "passwordtest",
   password_confirmation: "passwordtest",
-  activated: true,
 )
 
 # Users
@@ -25,7 +24,6 @@ User.create!(
     email: email,
     password: password,
     password_confirmation: password,
-    activated: true,
   )
 end
 

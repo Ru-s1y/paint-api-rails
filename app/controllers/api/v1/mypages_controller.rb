@@ -28,7 +28,7 @@ module Api
       def album_pictures
         @album = Album.find_by(id: params[:album_id])
         if @album
-          render json: @album.pictures
+          render 'album_pictures.json.jbuilder'
         else
           render json: { message: "failed" }
         end

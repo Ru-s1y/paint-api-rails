@@ -74,18 +74,19 @@ module Api
         end
       end
 
-      # タグの登録・削除
+      # タグの新規作成
       def create_tag
-        @tag = Tag.create!(
-          name: tags_params[:name]
-        )
-        if @tag.save
+        @tag = Tag.create!(tags_params)
+        if @tag
           render json: @tag
         else
-          render json: @tag.errors
+          render json: {
+            message: "create failed"
+          }
         end
       end
 
+      # タグの削除
       def destroy_tag
         if @tag.destroy
           render json: @tag
@@ -100,7 +101,7 @@ module Api
         end
 
         def tags_params
-          params.permit(:name)
+          params.require(:tag).permit(:name)
         end
 
         def picture_tag_params

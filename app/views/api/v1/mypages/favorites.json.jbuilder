@@ -5,14 +5,6 @@ json.pictures do
     json.description favoriteP.picture.description
     json.image favoriteP.picture.image
     json.created_at favoriteP.created_at
-  end
-end
-
-json.albums do
-  json.array! @favorite_albums do |favoriteA|
-    json.id favoriteA.album.id
-    json.name favoriteA.album.name
-    json.description favoriteA.album.description
-    json.created_at favoriteA.created_at
+    json.username favoriteP.picture.user.name
   end
 end

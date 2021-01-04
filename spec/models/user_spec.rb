@@ -1,5 +1,15 @@
 require 'rails_helper'
 
+# create_table "users", force: :cascade do |t|
+#   t.string "name", default: "NewUser"
+#   t.string "email", null: false
+#   t.string "password_digest", null: false
+#   t.boolean "activated", default: true, null: false
+#   t.datetime "created_at", null: false
+#   t.datetime "updated_at", null: false
+#   t.index ["email"], name: "index_users_on_email", unique: true
+# end
+
 RSpec.describe User, type: :model do
   # pending "add some examples to (or delete) #{__FILE__}"
   it "メールアドレス、パスワード、確認用パスワードがある場合、有効である" do
