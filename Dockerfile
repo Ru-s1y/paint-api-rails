@@ -5,6 +5,7 @@ WORKDIR /myapp
 ADD Gemfile /myapp/Gemfile
 ADD Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
+RUN apt install -y graphviz
 ADD . /myapp
 
 COPY entrypoint.sh /usr/bin/
