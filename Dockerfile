@@ -1,10 +1,12 @@
 FROM ruby:2.5
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN apt-get install -y vim
 RUN mkdir /myapp
 WORKDIR /myapp
 ADD Gemfile /myapp/Gemfile
 ADD Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
+RUN apt install -y graphviz
 ADD . /myapp
 
 COPY entrypoint.sh /usr/bin/

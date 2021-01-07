@@ -16,7 +16,11 @@ test:
 
 production:
   <<: *default
-  adapter: postgresql
-  encoding: utf-8
-  pool: 5
-  url: <%= ENV['DATABASE_URL'] %>
+  host: <%= Rails.application.credentials.rds[:host] %>
+  database: <%= Rails.application.credentials.rds[:database] %>
+  username: <%= Rails.application.credentials.rds[:username] %>
+  password: <%= Rails.application.credentials.rds[:password] %>
+  # adapter: postgresql
+  # encoding: utf-8
+  # pool: 5
+  # url: <%= ENV['DATABASE_URL'] %>
