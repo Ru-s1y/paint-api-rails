@@ -33,12 +33,13 @@ Rails.application.routes.draw do
         get :thumbnail, on: :collection
       end
 
-      # favorite
+      # favorite picture
       resources :favorite_pictures, only: [:create] do
         get :show, on: :collection
         delete :destroy, on: :collection
       end
 
+      # favorite album
       resources :favorite_albums, only: [:create] do
         get :show, on: :collection
         delete :destroy, on: :collection
