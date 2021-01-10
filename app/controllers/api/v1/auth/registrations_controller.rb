@@ -13,7 +13,8 @@ module Api
             password_confirmation: user_params[:password_confirmation]
           )
 
-          if @user.save
+          if @user.valid?
+            @user.save
             cookies[token_access_key] = cookie_token
             render json: {
               exp: auth.payload[:exp], # 有効期限
@@ -21,7 +22,7 @@ module Api
             }
           else
             errors_messages = @user.errors.keys.map { |key| [key, @user.errors.full_messages_for(key)]}.to_h
-            render json: { message: errors_messages }
+            render status: 401, json: { message: errors_messages }
           end
         end
 

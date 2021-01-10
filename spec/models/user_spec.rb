@@ -76,4 +76,21 @@ RSpec.describe User, type: :model do
     )
     expect(user.save).to be_falsey
   end
+
+  it "メールアドレスが重複している時、無効である。" do
+    User.create(
+      name: "testUser",
+      email: "test_user@example.com",
+      password: "password",
+      password_confirmation: "password"
+    )
+    user = User.new(
+      name: "testUser2",
+      email: "test_user@example.com",
+      password: "password",
+      password_confirmation: "password"
+    )
+    user.valid?
+    expect(user.errors[:email]).to include("はすでに存在します")
+  end
 end
