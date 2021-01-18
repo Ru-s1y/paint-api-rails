@@ -2,8 +2,8 @@ version: '3'
 services:
   db:
     image: postgres
-    # volumes:
-    #   - psgl_data:/var/lib/postgresql/data
+    volumes:
+      - psgl_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     environment: 
@@ -11,13 +11,30 @@ services:
       - POSTGRES_PASSWORD
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s"
     volumes:
       - .:/myapp
+      - public-data:/myapp/public
+      - tmp-data:/myapp/tmp
+      - log-data:/webapp/log
     ports:
       # - "3000:3000"
-      - "3001:3000"
+      - "3001:3001"
     depends_on:
       - db
+  nginx:
+    build:
+      context: containers/nginx
+    volumes:
+      - public-data:/webapp/public
+      - tmp-data:/myapp/tmp
+    ports:
+      - 80:80
+    depends_on: 
+      - web
 volumes:
+  public-data:
+  tmp-data:
+  log-data:
   psgl_data:
