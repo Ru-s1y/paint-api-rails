@@ -7,7 +7,7 @@ module UserAuth
   # 誰のために発行したかを明確にするためにクライアントドメインを使用
   mattr_accessor :token_audience
   self.token_audience = -> {
-    ENV["FRONT_DOMAIN"]
+    Rails.application.credentials.front_domain
   }
 
   # 署名アルゴリズムを指定する

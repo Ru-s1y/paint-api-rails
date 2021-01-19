@@ -101,12 +101,18 @@ module Api
         # AWS S3 Upload
         def put_s3(data, extension)
           file_name = Digest::SHA1.hexdigest(data) + extension
+          # s3 = Aws::S3::Resource.new(
+          #   :region => ENV['AWS_S3_REGION'],
+          #   :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+          #   :secret_access_key => ENV['AWS_ACCESS_SECRET_KEY']
+          # )
           s3 = Aws::S3::Resource.new(
-            :region => ENV['AWS_S3_REGION'],
-            :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-            :secret_access_key => ENV['AWS_ACCESS_SECRET_KEY']
+            :region => Rails.application.credentials.aws[:s3_region],
+            :access_key_id => Rails.application.credentials.aws[:access_key_id],
+            :secret_access_key => Rails.application.credentials.aws[:secret_access_key]
           )
-          bucket = s3.bucket(ENV['AWS_S3_BUCKET'])
+          # bucket = s3.bucket(ENV['AWS_S3_BUCKET'])
+          bucket = s3.bucket(Rails.application.credentials.aws[:s3_bucket])
           obj = bucket.object("uploader/#{current_user.id}/#{file_name}")
           obj.put(acl: "public-read", body: data)
           obj.public_url
